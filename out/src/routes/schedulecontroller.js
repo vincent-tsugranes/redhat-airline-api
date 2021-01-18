@@ -35,8 +35,8 @@ var ScheduleController = /** @class */ (function () {
             var startDate = luxon.DateTime.utc();
             var endDate = startDate.plus({ days: 7 });
             if ('start' in queryObject && 'end' in queryObject) {
-                startDate = luxon.DateTime.fromFormat(queryObject.start, 'M/d/yyyy');
-                endDate = luxon.DateTime.fromFormat(queryObject.end, 'M/d/yyyy');
+                startDate = luxon.DateTime.fromISO(queryObject.start);
+                endDate = luxon.DateTime.fromISO(queryObject.end);
             }
             var aircraftCount = 10;
             if ('aircraftCount' in queryObject) {
@@ -57,6 +57,7 @@ var ScheduleController = /** @class */ (function () {
     return ScheduleController;
 }());
 function generateFlights(aircraftCount, flightsCount, start, end) {
+    console.log('Generating ' + aircraftCount + ' aircraft with ' + flightsCount + ' flights from ' + start.toString() + ' to ' + end.toString());
     var flights = new Array();
     for (var i = 0; i < aircraftCount; i++) {
         var aircraft_registration = 'N' + faker.random.number({ min: 100, max: 999 }) + 'VT';
@@ -64,12 +65,15 @@ function generateFlights(aircraftCount, flightsCount, start, end) {
         var lastFlight = new flight_1.Flight(faker.random.number({ min: 100, max: 9999 }));
         lastFlight.id = faker.random.number({ min: 100, max: 9999 }) + (i * 10000);
         lastFlight.arrival_airport = new airport_1.Airport().random();
-        lastFlight.estimated_time_arrival = luxon.DateTime.utc();
+        lastFlight.estimated_time_arrival = start.minus({ hours: 4 });
         for (var j = 0; j < flightsCount; j++) {
             var thisFlight = new flight_1.Flight(lastFlight.id + 1);
             thisFlight.aircraft_registration = aircraft_registration;
             thisFlight.departure_airport = lastFlight.arrival_airport;
             thisFlight.arrival_airport = new airport_1.Airport().random();
+            if (thisFlight.arrival_airport.iata == thisFlight.departure_airport.iata) {
+                thisFlight.arrival_airport = new airport_1.Airport().random();
+            }
             thisFlight.estimated_time_departure = lastFlight.estimated_time_arrival.plus({ hours: faker.random.number({ min: 1, max: 6 }) }); //add random between 1-4 for ground
             thisFlight.estimated_time_arrival = thisFlight.estimated_time_departure.plus({ hours: faker.random.number({ min: 3, max: 12 }) }); //add random between 3-10 for flight 
             thisFlight.distance = thisFlight.departure_airport.distanceBetween(thisFlight.arrival_airport);

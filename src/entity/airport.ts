@@ -1,4 +1,4 @@
-import airportData from '../..//data/airports.json';
+import airportData from '../../data/airports.json';
 
 export class Airport{
     iata: string = "";
@@ -12,28 +12,22 @@ export class Airport{
     latitude: number = 0;
     longitude: number = 0;
 
-    //coordinates: Coordinates = [this.lat, this.lon];
-
     random(){
-        let airports :Airport[] = new Array<Airport>();
-        airportData.airports.forEach(airportJson => {
-            let airport : Airport = new Airport();
-            airport.name = airportJson.name;
-            airport.iata = airportJson.iata;
-            airport.icao = airportJson.icao;
+        const randomElement = airportData.airports[Math.floor(Math.random() * airportData.airports.length)]
+        let airport : Airport = new Airport();
+            airport.name = randomElement.name;
+            airport.iata = randomElement.iata;
+            airport.icao = randomElement.icao;
 
-            airport.city = airportJson.city;
-            airport.country = airportJson.country;
-            airport.elevation = airportJson.elevation;
-            airport.latitude = airportJson.lat;
-            airport.longitude = airportJson.lon;
-            airport.state = airportJson.state;
-            airport.tz = airportJson.tz;
-            airports.push(airport);
-        });
+            airport.city = randomElement.city;
+            airport.country = randomElement.country;
+            airport.elevation = randomElement.elevation;
+            airport.latitude = randomElement.lat;
+            airport.longitude = randomElement.lon;
+            airport.state = randomElement.state;
+            airport.tz = randomElement.tz;
 
-        const randomElement = airports[Math.floor(Math.random() * airports.length)];
-        return randomElement;
+        return airport
     }
 
     distanceBetween(airport :Airport, unit :string = "K"){
