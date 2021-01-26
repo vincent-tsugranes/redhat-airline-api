@@ -70,7 +70,7 @@ function generateFlights(aircraftCount: number, flightsCount: number, start: lux
             thisFlight.aircraft_registration = aircraft_registration;
             thisFlight.departure_airport = lastFlight.arrival_airport;
             thisFlight.arrival_airport = new Airport().random();
-            if (thisFlight.arrival_airport.iata == thisFlight.departure_airport.iata) { thisFlight.arrival_airport = new Airport().random() }
+            while (thisFlight.arrival_airport.iata == thisFlight.departure_airport.iata) { thisFlight.arrival_airport = new Airport().random() }
 
             thisFlight.estimated_time_departure = lastFlight.estimated_time_arrival.plus({hours:faker.random.number({min: 1, max: 6})}); //add random between 1-4 for ground
             thisFlight.estimated_time_arrival = thisFlight.estimated_time_departure.plus({hours:faker.random.number({min: 3, max: 12})}); //add random between 3-10 for flight 
@@ -79,6 +79,7 @@ function generateFlights(aircraftCount: number, flightsCount: number, start: lux
             thisFlight.crewmembers.push(new Crewmember().random());
             thisFlight.crewmembers.push(new Crewmember().random());
 
+            while (thisFlight.crewmembers[0].id == thisFlight.crewmembers[1].id){ thisFlight.crewmembers[1] = new Crewmember().random() }
             flights.push(thisFlight);
             lastFlight = thisFlight;
 
