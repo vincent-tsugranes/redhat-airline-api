@@ -11,11 +11,14 @@ var typescript_rest_1 = require("typescript-rest");
 // Importing all handlers
 require("./handlers");
 var schedulecontroller_1 = __importDefault(require("./routes/schedulecontroller"));
+var crewmembercontroller_1 = __importDefault(require("./routes/crewmembercontroller"));
 exports.app = express_1.default();
 exports.app.use(cors_1.default());
 exports.app.use(body_parser_1.default.json());
-var test = new schedulecontroller_1.default();
-exports.app.use('/', test.router);
+var schedulecController = new schedulecontroller_1.default();
+exports.app.use('/', schedulecController.router);
+var crewmemberController = new crewmembercontroller_1.default();
+exports.app.use('/', crewmemberController.router);
 typescript_rest_1.Server.buildServices(exports.app);
 // Just checking if given PORT variable is an integer or not
 var port = parseInt(process.env.PORT || "");

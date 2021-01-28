@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Airport = void 0;
-var airports_json_1 = __importDefault(require("../..//data/airports.json"));
+var airports_json_1 = __importDefault(require("../../data/airports.json"));
 var Airport = /** @class */ (function () {
     function Airport() {
         this.iata = "";
@@ -18,25 +18,20 @@ var Airport = /** @class */ (function () {
         this.latitude = 0;
         this.longitude = 0;
     }
-    //coordinates: Coordinates = [this.lat, this.lon];
     Airport.prototype.random = function () {
-        var airports = new Array();
-        airports_json_1.default.airports.forEach(function (airportJson) {
-            var airport = new Airport();
-            airport.name = airportJson.name;
-            airport.iata = airportJson.iata;
-            airport.icao = airportJson.icao;
-            airport.city = airportJson.city;
-            airport.country = airportJson.country;
-            airport.elevation = airportJson.elevation;
-            airport.latitude = airportJson.lat;
-            airport.longitude = airportJson.lon;
-            airport.state = airportJson.state;
-            airport.tz = airportJson.tz;
-            airports.push(airport);
-        });
-        var randomElement = airports[Math.floor(Math.random() * airports.length)];
-        return randomElement;
+        var randomElement = airports_json_1.default.airports[Math.floor(Math.random() * airports_json_1.default.airports.length)];
+        var airport = new Airport();
+        airport.name = randomElement.name;
+        airport.iata = randomElement.iata;
+        airport.icao = randomElement.icao;
+        airport.city = randomElement.city;
+        airport.country = randomElement.country;
+        airport.elevation = randomElement.elevation;
+        airport.latitude = randomElement.lat;
+        airport.longitude = randomElement.lon;
+        airport.state = randomElement.state;
+        airport.tz = randomElement.tz;
+        return airport;
     };
     Airport.prototype.distanceBetween = function (airport, unit) {
         if (unit === void 0) { unit = "K"; }

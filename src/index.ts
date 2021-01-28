@@ -7,14 +7,18 @@ import {Server} from "typescript-rest";
 import './handlers';
 
 import ScheduleController from './routes/schedulecontroller';
+import CrewmemberController from "./routes/crewmembercontroller";
 
 export const app: express.Application = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 
-let test = new ScheduleController();
-app.use('/', test.router);
+let schedulecController = new ScheduleController();
+app.use('/', schedulecController.router);
+
+let crewmemberController = new CrewmemberController();
+app.use('/', crewmemberController.router);
 
 Server.buildServices(app);
 

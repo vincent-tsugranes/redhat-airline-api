@@ -6,21 +6,16 @@ export class Crewmember {
     last_name: string = "";
     rating: string = "";
     base: string = "";
+    img: string = "";
 
     random(){
-        let crewmembers :Crewmember[] = new Array<Crewmember>();
-        crewData.crewmembers.forEach(crewJson => {
-            let crew : Crewmember = new Crewmember();
-            crew.id = crewJson.id;
-            crew.first_name = crewJson.first_name;
-            crew.last_name = crewJson.last_name;
-            crew.rating = crewJson.rating;
-            crew.base = crewJson.base;
-            
-            crewmembers.push(crew);
-        });
-
-        const randomElement = crewmembers[Math.floor(Math.random() * crewmembers.length)];
-        return randomElement;
+        const randomElement = crewData.crewmembers[Math.floor(Math.random() * crewData.crewmembers.length)]
+        let crew : Crewmember = new Crewmember();
+        crew.id = randomElement.id;
+        crew.first_name = randomElement.first_name;
+        crew.last_name = randomElement.last_name;
+        crew.rating = randomElement.rating;
+        crew.base = randomElement.base;
+        return crew;
     }
 }
