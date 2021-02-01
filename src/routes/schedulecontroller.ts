@@ -24,12 +24,12 @@ class ScheduleController{
       getSchedule = (request: express.Request, response: express.Response) => {
         const queryObject = url.parse(request.url,true).query;
 
-        let startDate = luxon.DateTime.utc();
+        let startDate = luxon.DateTime.utc().startOf('day')
         let endDate = startDate.plus({days:7})
 
         if ('start' in queryObject && 'end' in queryObject){
-            startDate = luxon.DateTime.fromISO(queryObject.start)
-            endDate = luxon.DateTime.fromISO(queryObject.end)
+            startDate = luxon.DateTime.fromISO(queryObject.start, {zone: 'utc'})
+            endDate = luxon.DateTime.fromISO(queryObject.end, {zone: 'utc'})
         }
 
         let aircraftCount = 10
