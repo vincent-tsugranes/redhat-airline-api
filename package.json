@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "nodemon --watch 'src/**/*.ts' src/index.ts",
-    "build": "rm -rf build && tsc -p ."
+    "build": "rm -rf build && tsc -p .",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
