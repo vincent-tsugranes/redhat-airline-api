@@ -6,6 +6,7 @@
     "name": "Vince Tsugranes",
     "url": "https://github.com/vincent-tsugranes"
   },
+  "main": "src/index.js",
   "scripts": {
     "build": "tsc",
     "nodeshift": "nodeshift --expose",
