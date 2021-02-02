@@ -57,13 +57,20 @@ var ScheduleController = /** @class */ (function () {
     return ScheduleController;
 }());
 function generateFlights(aircraftCount, flightsCount, start, end) {
-    console.log('Generating ' + aircraftCount + ' aircraft with ' + flightsCount + ' flights from ' + start.toString() + ' to ' + end.toString());
+    console.log('Generating ' +
+        aircraftCount +
+        ' aircraft with ' +
+        flightsCount +
+        ' flights from ' +
+        start.toString() +
+        ' to ' +
+        end.toString());
     var flights = new Array();
     for (var i = 0; i < aircraftCount; i++) {
         var aircraft_registration = 'N' + faker.random.number({ min: 100, max: 999 }) + 'VT';
         //initialize the first flight
         var lastFlight = new flight_1.Flight(faker.random.number({ min: 100, max: 9999 }));
-        lastFlight.id = faker.random.number({ min: 100, max: 9999 }) + (i * 10000);
+        lastFlight.id = faker.random.number({ min: 100, max: 9999 }) + i * 10000;
         lastFlight.arrival_airport = new airport_1.Airport().random();
         lastFlight.estimated_time_arrival = start.minus({ hours: 4 });
         for (var j = 0; j < flightsCount; j++) {
@@ -75,7 +82,7 @@ function generateFlights(aircraftCount, flightsCount, start, end) {
                 thisFlight.arrival_airport = new airport_1.Airport().random();
             }
             thisFlight.estimated_time_departure = lastFlight.estimated_time_arrival.plus({ hours: faker.random.number({ min: 1, max: 6 }) }); //add random between 1-4 for ground
-            thisFlight.estimated_time_arrival = thisFlight.estimated_time_departure.plus({ hours: faker.random.number({ min: 3, max: 12 }) }); //add random between 3-10 for flight 
+            thisFlight.estimated_time_arrival = thisFlight.estimated_time_departure.plus({ hours: faker.random.number({ min: 3, max: 12 }) }); //add random between 3-10 for flight
             thisFlight.distance = thisFlight.departure_airport.distanceBetween(thisFlight.arrival_airport);
             thisFlight.crewmembers.push(new crewmember_1.Crewmember().random());
             thisFlight.crewmembers.push(new crewmember_1.Crewmember().random());

@@ -1,6 +1,6 @@
-import { Crewmember } from "./crewmember";
-import { Airport } from "./airport";
-import * as luxon from "luxon";
+import { Crewmember } from './crewmember';
+import { Airport } from './airport';
+import * as luxon from 'luxon';
 export declare class Flight {
     id: number;
     aircraft_registration: string;

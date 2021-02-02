@@ -8,11 +8,11 @@ var crewmembers_json_1 = __importDefault(require("../..//data/crewmembers.json")
 var Crewmember = /** @class */ (function () {
     function Crewmember() {
         this.id = 0;
-        this.first_name = "";
-        this.last_name = "";
-        this.rating = "";
-        this.base = "";
-        this.img = "";
+        this.first_name = '';
+        this.last_name = '';
+        this.rating = '';
+        this.base = '';
+        this.img = '';
     }
     Crewmember.prototype.random = function () {
         var randomElement = crewmembers_json_1.default.crewmembers[Math.floor(Math.random() * crewmembers_json_1.default.crewmembers.length)];
