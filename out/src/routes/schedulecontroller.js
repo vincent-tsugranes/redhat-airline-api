@@ -14,7 +14,7 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
     __setModuleDefault(result, mod);
     return result;
 };
@@ -32,11 +32,11 @@ var ScheduleController = /** @class */ (function () {
         this.path = '/schedule';
         this.getSchedule = function (request, response) {
             var queryObject = url.parse(request.url, true).query;
-            var startDate = luxon.DateTime.utc();
+            var startDate = luxon.DateTime.utc().startOf('day');
             var endDate = startDate.plus({ days: 7 });
             if ('start' in queryObject && 'end' in queryObject) {
-                startDate = luxon.DateTime.fromISO(queryObject.start);
-                endDate = luxon.DateTime.fromISO(queryObject.end);
+                startDate = luxon.DateTime.fromISO(queryObject.start, { zone: 'utc' });
+                endDate = luxon.DateTime.fromISO(queryObject.end, { zone: 'utc' });
             }
             var aircraftCount = 10;
             if ('aircraftCount' in queryObject) {

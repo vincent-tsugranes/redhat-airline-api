@@ -12,9 +12,11 @@ var __assign = (this && this.__assign) || function () {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resError = exports.resOK = void 0;
-exports.resOK = function (data) { return (__assign({ error: false, message: '' }, data)); };
-exports.resError = function (message) { return ({
+var resOK = function (data) { return (__assign({ error: false, message: '' }, data)); };
+exports.resOK = resOK;
+var resError = function (message) { return ({
     error: true,
     message: message,
 }); };
+exports.resError = resError;
 //# sourceMappingURL=shortcuts.js.map

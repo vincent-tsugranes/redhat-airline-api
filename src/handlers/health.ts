@@ -1,6 +1,6 @@
-import {Path, GET} from "typescript-rest";
-import {resOK} from '../helpers';
-import {version} from '../../package.json';
+import { Path, GET } from 'typescript-rest';
+import { resOK } from '../helpers';
+import { version } from '../../package.json';
 
 @Path('/')
 class Health {
@@ -11,11 +11,10 @@ class Health {
    * defined in package.json file
    */
   @GET
-  index(): {status: string, version: string} {
+  index(): { status: string; version: string } {
     return resOK({
       status: 'ok',
       version: version,
     });
   }
 }
-
